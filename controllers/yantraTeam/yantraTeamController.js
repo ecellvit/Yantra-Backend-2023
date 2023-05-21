@@ -38,6 +38,16 @@ exports.createTeam = catchAsync(async (req, res, next) => {
     );
   }
 
+  //check whether teamname already taken
+  const yantraTeam = await yantraTeams.findOne({
+    teamName: req.body.teamName,
+  });
+  if (yantraTeam) {
+    return next(
+      new AppError("TeamName Already Exists", 412, errorCodes.TEAM_NAME_EXISTS)
+    );
+  }
+
   const user = await User.findById({ _id: req.user._id });
 
   if (user.registeredEvents[eventCodes.YANTRA] === 0) {
@@ -47,16 +57,6 @@ exports.createTeam = catchAsync(async (req, res, next) => {
         412,
         errorCodes.USER_NOT_REGISTERED_FOR_EVENT
       )
-    );
-  }
-
-  //check whether teamname already taken
-  const yantraTeam = await yantraTeams.findOne({
-    teamName: req.body.teamName,
-  });
-  if (yantraTeam) {
-    return next(
-      new AppError("TeamName Already Exists", 412, errorCodes.TEAM_NAME_EXISTS)
     );
   }
 
@@ -103,16 +103,256 @@ exports.createTeam = catchAsync(async (req, res, next) => {
     );
   }
 
+  let teamMate1 = null;
+  let teamMate2 = null;
+  let teamMate3 = null;
+
+  if (req.body.teamMate1Email) {
+    teamMate1 = await User.findOne({
+      email: req.body.teamMate1Email,
+    });
+
+    if (!teamMate1) {
+      return next(
+        new AppError(
+          "One of the entered emails is incorrect or the teammate hasn't singed up",
+          412,
+          errorCodes.NOT_SIGNED_UP
+        )
+      );
+    }
+
+    if (teamMate1.registeredEvents[eventCodes.YANTRA] === 0) {
+      return next(
+        new AppError(
+          "One of the team mates not registered for yantra",
+          412,
+          errorCodes.ONE_OF_THE_TEAM_MATES_NOT_REGISTERED_FOR_YANTRA
+        )
+      );
+    }
+
+    if (teamMate1.yantraTeamId || teamMate1.yantraTeamRole) {
+      return next(
+        new AppError(
+          "One of the team mates already Part of a yantraTeams",
+          412,
+          errorCodes.ONE_OF_THE_TEAM_MATES_ALREADY_IN_YANTRA_TEAM
+        )
+      );
+    }
+
+    const request = await yantraPendingApprovals.findOne({
+      userId: teamMate1._id,
+      status: requestStatusTypes.PENDING_APPROVAL,
+    });
+
+    const requestByLeader = await yantraTeamLeaderApprovalsModel.findOne({
+      userId: teamMate1._id,
+      status: requestStatusTypes.PENDING_APPROVAL,
+    });
+
+    //user shouldnt have pending requests
+    if (request) {
+      return next(
+        new AppError(
+          "For one of the teammates -> Remove Requests Sent to other Teams to Create a NewTeam",
+          412,
+          errorCodes.ONE_OF_THE_TEAM_MATES_HAVE_PENDING_REQUESTS
+        )
+      );
+    }
+
+    //user shouldnt have pending requests sent by other team leader
+    if (requestByLeader) {
+      return next(
+        new AppError(
+          "For one of the teammates -> Remove Requests by other Leaders to Create a NewTeam",
+          412,
+          errorCodes.ONE_OF_THE_TEAM_MATES_HAVE_PENDING_REQUESTS
+        )
+      );
+    }
+  }
+
+  if (req.body.teamMate2Email) {
+    teamMate2 = await User.findOne({
+      email: req.body.teamMate2Email,
+    });
+
+    if (!teamMate2) {
+      return next(
+        new AppError(
+          "One of the entered emails is incorrect or the teammate hasn't singed up",
+          412,
+          errorCodes.NOT_SIGNED_UP
+        )
+      );
+    }
+
+    if (teamMate2.registeredEvents[eventCodes.YANTRA] === 0) {
+      return next(
+        new AppError(
+          "One of the team mates not registered for yantra",
+          412,
+          errorCodes.ONE_OF_THE_TEAM_MATES_NOT_REGISTERED_FOR_YANTRA
+        )
+      );
+    }
+
+    if (teamMate2.yantraTeamId || teamMate2.yantraTeamRole) {
+      return next(
+        new AppError(
+          "One of the team mates already Part of a yantraTeams",
+          412,
+          errorCodes.ONE_OF_THE_TEAM_MATES_ALREADY_IN_YANTRA_TEAM
+        )
+      );
+    }
+
+    const request = await yantraPendingApprovals.findOne({
+      userId: teamMate2._id,
+      status: requestStatusTypes.PENDING_APPROVAL,
+    });
+
+    const requestByLeader = await yantraTeamLeaderApprovalsModel.findOne({
+      userId: teamMate2._id,
+      status: requestStatusTypes.PENDING_APPROVAL,
+    });
+
+    //user shouldnt have pending requests
+    if (request) {
+      return next(
+        new AppError(
+          "For one of the teammates -> Remove Requests Sent to other Teams to Create a NewTeam",
+          412,
+          errorCodes.ONE_OF_THE_TEAM_MATES_HAVE_PENDING_REQUESTS
+        )
+      );
+    }
+
+    //user shouldnt have pending requests sent by other team leader
+    if (requestByLeader) {
+      return next(
+        new AppError(
+          "For one of the teammates -> Remove Requests by other Leaders to Create a NewTeam",
+          412,
+          errorCodes.ONE_OF_THE_TEAM_MATES_HAVE_PENDING_REQUESTS
+        )
+      );
+    }
+  }
+  if (req.body.teamMate3Email) {
+    teamMate3 = await User.findOne({
+      email: req.body.teamMate3Email,
+    });
+
+    if (!teamMate3) {
+      return next(
+        new AppError(
+          "One of the entered emails is incorrect or the teammate hasn't singed up",
+          412,
+          errorCodes.NOT_SIGNED_UP
+        )
+      );
+    }
+
+    if (teamMate3.registeredEvents[eventCodes.YANTRA] === 0) {
+      return next(
+        new AppError(
+          "One of the team mates not registered for yantra",
+          412,
+          errorCodes.ONE_OF_THE_TEAM_MATES_NOT_REGISTERED_FOR_YANTRA
+        )
+      );
+    }
+
+    if (teamMate3.yantraTeamId || teamMate3.yantraTeamRole) {
+      return next(
+        new AppError(
+          "One of the team mates already Part of a yantraTeams",
+          412,
+          errorCodes.ONE_OF_THE_TEAM_MATES_ALREADY_IN_YANTRA_TEAM
+        )
+      );
+    }
+
+    const request = await yantraPendingApprovals.findOne({
+      userId: teamMate3._id,
+      status: requestStatusTypes.PENDING_APPROVAL,
+    });
+
+    const requestByLeader = await yantraTeamLeaderApprovalsModel.findOne({
+      userId: teamMate3._id,
+      status: requestStatusTypes.PENDING_APPROVAL,
+    });
+
+    //user shouldnt have pending requests
+    if (request) {
+      return next(
+        new AppError(
+          "For one of the teammates -> Remove Requests Sent to other Teams to Create a NewTeam",
+          412,
+          errorCodes.ONE_OF_THE_TEAM_MATES_HAVE_PENDING_REQUESTS
+        )
+      );
+    }
+
+    //user shouldnt have pending requests sent by other team leader
+    if (requestByLeader) {
+      return next(
+        new AppError(
+          "For one of the teammates -> Remove Requests by other Leaders to Create a NewTeam",
+          412,
+          errorCodes.ONE_OF_THE_TEAM_MATES_HAVE_PENDING_REQUESTS
+        )
+      );
+    }
+  }
+
+  let newTeamMembers = [];
+  newTeamMembers.push(req.user._id);
+  if (teamMate1) {
+    newTeamMembers.push(teamMate1._id);
+  }
+  if (teamMate2) {
+    newTeamMembers.push(teamMate2._id);
+  }
+  if (teamMate3) {
+    newTeamMembers.push(teamMate3._id);
+  }
+
   const newTeam = await new yantraTeams({
     teamName: req.body.teamName,
     teamLeaderId: req.user._id,
-    members: [req.user._id],
+    members: newTeamMembers,
   }).save();
 
   await User.updateMany(
     { _id: req.user._id },
     { $set: { yantraTeamId: newTeam._id, yantraTeamRole: teamRole.LEADER } }
   );
+
+  if (teamMate1) {
+    await teamMate1.updateMany(
+      { _id: teamMate1._id },
+      { $set: { yantraTeamId: newTeam._id, yantraTeamRole: teamRole.MEMBER } }
+    );
+  }
+
+  if (teamMate2) {
+    await teamMate2.updateMany(
+      { _id: teamMate2._id },
+      { $set: { yantraTeamId: newTeam._id, yantraTeamRole: teamRole.MEMBER } }
+    );
+  }
+
+  if (teamMate3) {
+    await teamMate3.updateMany(
+      { _id: teamMate3._id },
+      { $set: { yantraTeamId: newTeam._id, yantraTeamRole: teamRole.MEMBER } }
+    );
+  }
 
   res.status(201).json({
     message: "New Yantra Team Created Successfully",
@@ -580,27 +820,27 @@ exports.updateRequest = catchAsync(async (req, res, next) => {
       );
     }
 
-  //   const user = await User.findById({ _id: req.body.userId });
-  //   transporter.sendMail({
-  //     from: process.env.NODEMAILER_EMAIL,
-  //     to: user.email,
-  //     subject: "ESUMMIT'23 ECELL-VIT. Request Approved By E-Hack Team",
-  //     html:
-  //       user.firstName +
-  //       " " +
-  //       user.lastName +
-  //       " " +
-  //       "your request is approved by E-Hack team " +
-  //       yantraTeam.teamName +
-  //       ".<br>" +
-  //       "Click on the link to view the team details https://esummit.ecellvit.com <br>",
-  //     auth: {
-  //       user: process.env.NODEMAILER_EMAIL,
-  //       refreshToken: process.env.NODEMAILER_REFRESH_TOKEN,
-  //       accessToken: process.env.NODEMAILER_ACCESS_TOKEN,
-  //       expires: 3599,
-  //     },
-  //   });
+    //   const user = await User.findById({ _id: req.body.userId });
+    //   transporter.sendMail({
+    //     from: process.env.NODEMAILER_EMAIL,
+    //     to: user.email,
+    //     subject: "ESUMMIT'23 ECELL-VIT. Request Approved By E-Hack Team",
+    //     html:
+    //       user.firstName +
+    //       " " +
+    //       user.lastName +
+    //       " " +
+    //       "your request is approved by E-Hack team " +
+    //       yantraTeam.teamName +
+    //       ".<br>" +
+    //       "Click on the link to view the team details https://esummit.ecellvit.com <br>",
+    //     auth: {
+    //       user: process.env.NODEMAILER_EMAIL,
+    //       refreshToken: process.env.NODEMAILER_REFRESH_TOKEN,
+    //       accessToken: process.env.NODEMAILER_ACCESS_TOKEN,
+    //       expires: 3599,
+    //     },
+    //   });
   }
 
   res.status(201).json({
