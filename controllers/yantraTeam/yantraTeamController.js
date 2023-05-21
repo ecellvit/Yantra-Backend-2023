@@ -334,21 +334,21 @@ exports.createTeam = catchAsync(async (req, res, next) => {
   );
 
   if (teamMate1) {
-    await teamMate1.updateMany(
+    await User.updateMany(
       { _id: teamMate1._id },
       { $set: { yantraTeamId: newTeam._id, yantraTeamRole: teamRole.MEMBER } }
     );
   }
 
   if (teamMate2) {
-    await teamMate2.updateMany(
+    await User.updateMany(
       { _id: teamMate2._id },
       { $set: { yantraTeamId: newTeam._id, yantraTeamRole: teamRole.MEMBER } }
     );
   }
 
   if (teamMate3) {
-    await teamMate3.updateMany(
+    await User.updateMany(
       { _id: teamMate3._id },
       { $set: { yantraTeamId: newTeam._id, yantraTeamRole: teamRole.MEMBER } }
     );
