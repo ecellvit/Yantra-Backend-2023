@@ -165,21 +165,6 @@ exports.getTeamDetails = catchAsync(async (req, res, next) => {
 });
 
 exports.updateTeam = catchAsync(async (req, res, next) => {
-  const noOfYantraTeams = await yantraTeams.find({
-    $expr: {
-      $gte: [{ $size: { $ifNull: ["$members", []] } }, 3],
-    },
-  });
-
-  if (noOfYantraTeams.length >= 68) {
-    return next(
-      new AppError(
-        "Functionality has been disabled, because max amount of teams has been reached",
-        412,
-        errorCodes.MAXIMUM_NUMBER_OF_TEAMS_REACHED
-      )
-    );
-  }
   //body validation
   const { error } = updateTeamBodyValidation(req.body);
   if (error) {
@@ -272,22 +257,6 @@ exports.updateTeam = catchAsync(async (req, res, next) => {
 });
 
 exports.deleteTeam = catchAsync(async (req, res, next) => {
-  const noOfYantraTeams = await yantraTeams.find({
-    $expr: {
-      $gte: [{ $size: { $ifNull: ["$members", []] } }, 3],
-    },
-  });
-
-  if (noOfYantraTeams.length >= 68) {
-    return next(
-      new AppError(
-        "Functionality has been disabled, because max amount of teams has been reached",
-        412,
-        errorCodes.MAXIMUM_NUMBER_OF_TEAMS_REACHED
-      )
-    );
-  }
-
   if (req.params.teamId.length !== objectIdLength) {
     return next(
       new AppError("Invalid TeamId", 412, errorCodes.INVALID_TEAM_ID)
@@ -390,21 +359,6 @@ exports.deleteTeam = catchAsync(async (req, res, next) => {
 });
 
 exports.getTeamRequests = catchAsync(async (req, res, next) => {
-  const noOfYantraTeams = await yantraTeams.find({
-    $expr: {
-      $gte: [{ $size: { $ifNull: ["$members", []] } }, 3],
-    },
-  });
-
-  if (noOfYantraTeams.length >= 68) {
-    return next(
-      new AppError(
-        "Functionality has been disabled, because max amount of teams has been reached",
-        412,
-        errorCodes.MAXIMUM_NUMBER_OF_TEAMS_REACHED
-      )
-    );
-  }
   //validate yantraTeam id
   if (req.params.teamId.length !== objectIdLength) {
     return next(
@@ -451,21 +405,6 @@ exports.getTeamRequests = catchAsync(async (req, res, next) => {
 });
 
 exports.updateRequest = catchAsync(async (req, res, next) => {
-  const noOfYantraTeams = await yantraTeams.find({
-    $expr: {
-      $gte: [{ $size: { $ifNull: ["$members", []] } }, 3],
-    },
-  });
-
-  if (noOfYantraTeams.length >= 68) {
-    return next(
-      new AppError(
-        "Functionality has been disabled, because max amount of teams has been reached",
-        412,
-        errorCodes.MAXIMUM_NUMBER_OF_TEAMS_REACHED
-      )
-    );
-  }
   //body validation
   const { error } = updateRequestBodyValidation(req.body);
   if (error) {
@@ -670,21 +609,6 @@ exports.updateRequest = catchAsync(async (req, res, next) => {
 });
 
 exports.removeMember = catchAsync(async (req, res, next) => {
-  const noOfYantraTeams = await yantraTeams.find({
-    $expr: {
-      $gte: [{ $size: { $ifNull: ["$members", []] } }, 3],
-    },
-  });
-
-  if (noOfYantraTeams.length >= 68) {
-    return next(
-      new AppError(
-        "Functionality has been disabled, because max amount of teams has been reached",
-        412,
-        errorCodes.MAXIMUM_NUMBER_OF_TEAMS_REACHED
-      )
-    );
-  }
   //body validation
   const { error } = removeMemberBodyValidation(req.body);
   if (error) {
@@ -810,22 +734,6 @@ exports.getAllTeams = catchAsync(async (req, res, next) => {
   // console.log("Time Taken = ", endTime - startTime);
   // console.log(teams);
 
-  const noOfYantraTeams = await yantraTeams.find({
-    $expr: {
-      $gte: [{ $size: { $ifNull: ["$members", []] } }, 3],
-    },
-  });
-
-  if (noOfYantraTeams.length >= 68) {
-    return next(
-      new AppError(
-        "Functionality has been disabled, because max amount of teams has been reached",
-        412,
-        errorCodes.MAXIMUM_NUMBER_OF_TEAMS_REACHED
-      )
-    );
-  }
-
   res.status(201).json({
     message: "Get All Teams Successfull",
     paginatedResult: res.paginatedResults,
@@ -833,21 +741,6 @@ exports.getAllTeams = catchAsync(async (req, res, next) => {
 });
 
 exports.getTeamToken = catchAsync(async (req, res, next) => {
-  const noOfYantraTeams = await yantraTeams.find({
-    $expr: {
-      $gte: [{ $size: { $ifNull: ["$members", []] } }, 3],
-    },
-  });
-
-  if (noOfYantraTeams.length >= 68) {
-    return next(
-      new AppError(
-        "Functionality has been disabled, because max amount of teams has been reached",
-        412,
-        errorCodes.MAXIMUM_NUMBER_OF_TEAMS_REACHED
-      )
-    );
-  }
   //validate yantraTeam id
   if (req.params.teamId.length !== objectIdLength) {
     return next(
@@ -884,22 +777,6 @@ exports.getTeamToken = catchAsync(async (req, res, next) => {
 });
 
 exports.getAllMembers = catchAsync(async (req, res, next) => {
-  const noOfYantraTeams = await yantraTeams.find({
-    $expr: {
-      $gte: [{ $size: { $ifNull: ["$members", []] } }, 3],
-    },
-  });
-
-  if (noOfYantraTeams.length >= 68) {
-    return next(
-      new AppError(
-        "Functionality has been disabled, because max amount of teams has been reached",
-        412,
-        errorCodes.MAXIMUM_NUMBER_OF_TEAMS_REACHED
-      )
-    );
-  }
-
   const user = await User.findById({ _id: req.user._id });
 
   if (user.yantraTeamId === null || user.yantraTeamRole !== teamRole.LEADER) {
@@ -925,22 +802,6 @@ exports.getAllMembers = catchAsync(async (req, res, next) => {
 });
 
 exports.getMemberRequests = catchAsync(async (req, res, next) => {
-  const noOfYantraTeams = await yantraTeams.find({
-    $expr: {
-      $gte: [{ $size: { $ifNull: ["$members", []] } }, 3],
-    },
-  });
-
-  if (noOfYantraTeams.length >= 68) {
-    return next(
-      new AppError(
-        "Functionality has been disabled, because max amount of teams has been reached",
-        412,
-        errorCodes.MAXIMUM_NUMBER_OF_TEAMS_REACHED
-      )
-    );
-  }
-
   const user = await User.findById({ _id: req.user._id });
 
   if (user.yantraTeamId === null || user.yantraTeamRole !== teamRole.LEADER) {
@@ -970,21 +831,6 @@ exports.getMemberRequests = catchAsync(async (req, res, next) => {
 });
 
 exports.addMemberRequest = catchAsync(async (req, res, next) => {
-  const noOfYantraTeams = await yantraTeams.find({
-    $expr: {
-      $gte: [{ $size: { $ifNull: ["$members", []] } }, 3],
-    },
-  });
-
-  if (noOfYantraTeams.length >= 68) {
-    return next(
-      new AppError(
-        "Functionality has been disabled, because max amount of teams has been reached",
-        412,
-        errorCodes.MAXIMUM_NUMBER_OF_TEAMS_REACHED
-      )
-    );
-  }
   const user = await User.findById({ _id: req.user._id });
 
   if (user.yantraTeamId === null || user.yantraTeamRole !== teamRole.LEADER) {
@@ -1130,21 +976,6 @@ exports.addMemberRequest = catchAsync(async (req, res, next) => {
 });
 
 exports.removeMemberRequest = catchAsync(async (req, res, next) => {
-  const noOfYantraTeams = await yantraTeams.find({
-    $expr: {
-      $gte: [{ $size: { $ifNull: ["$members", []] } }, 3],
-    },
-  });
-
-  if (noOfYantraTeams.length >= 68) {
-    return next(
-      new AppError(
-        "Functionality has been disabled, because max amount of teams has been reached",
-        412,
-        errorCodes.MAXIMUM_NUMBER_OF_TEAMS_REACHED
-      )
-    );
-  }
   const user = await User.findById({ _id: req.user._id });
 
   if (user.yantraTeamId === null || user.yantraTeamRole !== teamRole.LEADER) {
