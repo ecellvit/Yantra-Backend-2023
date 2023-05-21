@@ -84,11 +84,7 @@ const errorCodes = {
 };
 
 const eventCodes = {
-  IMPETUS: 0,
-  EHACK: 1,
-  INNOVENTURE: 2,
-  ETALK: 3,
-  TRADING_WORKSHOP: 4,
+  YANTRA: 0
 };
 
 const registerTypes = {
