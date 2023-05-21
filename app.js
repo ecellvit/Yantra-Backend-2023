@@ -44,6 +44,7 @@ app.get("/heartbeat", function (req, res) {
 });
 
 app.use("/api/auth", require("./routes/authRoutes"));
+app.use("/api/yantra", require("./routes/yantraTeamRoutes"));
 
 //all invalid urls handled here
 app.all("*", (req, res, next) => {
