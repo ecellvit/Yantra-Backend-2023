@@ -5,9 +5,9 @@ module.exports = {
   createTeamBodyValidation: (body) => {
     const schema = Joi.object({
       teamName: Joi.string().required(),
-      teamMate1Email:Joi.string().email().required(),
-      teamMate2Email:Joi.string().email().required(),
-      teamMate3Email:Joi.string().email().required(),
+      teamMate1Email:Joi.string().email(),
+      teamMate2Email:Joi.string().email(),
+      teamMate3Email:Joi.string().email(),
     });
     return schema.validate(body);
   },
