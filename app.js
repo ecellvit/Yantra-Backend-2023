@@ -43,6 +43,8 @@ app.get("/heartbeat", function (req, res) {
   });
 });
 
+app.use("/api/auth", require("./routes/authRoutes"));
+
 //all invalid urls handled here
 app.all("*", (req, res, next) => {
   next(
