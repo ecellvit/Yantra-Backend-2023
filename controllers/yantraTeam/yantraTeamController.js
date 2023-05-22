@@ -38,7 +38,11 @@ exports.createTeam = catchAsync(async (req, res, next) => {
     );
   }
 
-  if(req.body.teamMate1Email == req.body.teamMate2Email || req.body.teamMate1Email == req.body.teamMate3Email || req.body.teamMate2Email == req.body.teamMate3Email){
+  if (
+    req.body.teamMate1Email == req.body.teamMate2Email ||
+    req.body.teamMate1Email == req.body.teamMate3Email ||
+    req.body.teamMate2Email == req.body.teamMate3Email
+  ) {
     return next(
       new AppError(
         "Team members should have different emails",
@@ -81,7 +85,11 @@ exports.createTeam = catchAsync(async (req, res, next) => {
     );
   }
 
-  if(user.email == req.body.teamMate1Email || user.email == req.body.teamMate2Email || user.email == req.body.teamMate3Email){
+  if (
+    user.email == req.body.teamMate1Email ||
+    user.email == req.body.teamMate2Email ||
+    user.email == req.body.teamMate3Email
+  ) {
     return next(
       new AppError(
         "Team Leader cannot be a team member",

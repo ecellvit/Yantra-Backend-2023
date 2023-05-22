@@ -91,9 +91,9 @@ const errorCodes = {
 
 const eventCodes = {
   YANTRA: 0,
-  WORKSHOP_1 : 1,
-  WORKSHOP_2 : 2,
-  WORKSHOP_3 : 3,
+  WORKSHOP_1: 1,
+  WORKSHOP_2: 2,
+  WORKSHOP_3: 3,
 };
 
 const registerTypes = {

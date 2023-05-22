@@ -309,8 +309,7 @@ exports.yantraGetRequest = catchAsync(async (req, res, next) => {
       select: "teamName teamLeaderId members",
       populate: {
         path: "teamName teamLeaderId",
-        select:
-          "email firstName lastName mobileNumber yantraTeamRole",
+        select: "email firstName lastName mobileNumber yantraTeamRole",
       },
     });
 
@@ -690,7 +689,6 @@ exports.yantraJoinTeamViaToken = catchAsync(async (req, res, next) => {
     });
 });
 
-
 //--------------------------------------------------------->
 
 exports.getDetails = catchAsync(async (req, res, next) => {
@@ -977,4 +975,3 @@ exports.yantraUpdateMemberRequest = catchAsync(async (req, res, next) => {
     message: "Updated Request Successfully",
   });
 });
-
