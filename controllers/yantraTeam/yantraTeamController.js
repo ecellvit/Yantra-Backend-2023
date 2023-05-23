@@ -142,7 +142,7 @@ exports.createTeam = catchAsync(async (req, res, next) => {
     if (!teamMate1) {
       return next(
         new AppError(
-          "One of the entered emails is incorrect or the teammate hasn't singed up",
+          `${req.body.teamMate1Email} email is incorrect or the teammate hasn't singed up`,
           412,
           errorCodes.NOT_SIGNED_UP
         )
@@ -152,7 +152,7 @@ exports.createTeam = catchAsync(async (req, res, next) => {
     if (teamMate1.registeredEvents[eventCodes.YANTRA] === 0) {
       return next(
         new AppError(
-          "One of the team mates not registered for yantra",
+          `${req.body.teamMate1Email} not registered for yantra`,
           412,
           errorCodes.ONE_OF_THE_TEAM_MATES_NOT_REGISTERED_FOR_YANTRA
         )
@@ -162,7 +162,7 @@ exports.createTeam = catchAsync(async (req, res, next) => {
     if (teamMate1.yantraTeamId || teamMate1.yantraTeamRole) {
       return next(
         new AppError(
-          "One of the team mates already Part of a yantraTeams",
+          `${req.body.teamMate1Email} already Part of a yantraTeam`,
           412,
           errorCodes.ONE_OF_THE_TEAM_MATES_ALREADY_IN_YANTRA_TEAM
         )
@@ -183,7 +183,7 @@ exports.createTeam = catchAsync(async (req, res, next) => {
     if (request) {
       return next(
         new AppError(
-          "For one of the teammates -> Remove Requests Sent to other Teams to Create a NewTeam",
+          `${req.body.teamMate1Email} -> Remove Requests Sent to other Teams to Create a NewTeam`,
           412,
           errorCodes.ONE_OF_THE_TEAM_MATES_HAVE_PENDING_REQUESTS
         )
@@ -194,7 +194,7 @@ exports.createTeam = catchAsync(async (req, res, next) => {
     if (requestByLeader) {
       return next(
         new AppError(
-          "For one of the teammates -> Remove Requests by other Leaders to Create a NewTeam",
+          `${req.body.teamMate1Email} -> Remove Requests by other Leaders to Create a NewTeam`,
           412,
           errorCodes.ONE_OF_THE_TEAM_MATES_HAVE_PENDING_REQUESTS
         )
@@ -210,7 +210,7 @@ exports.createTeam = catchAsync(async (req, res, next) => {
     if (!teamMate2) {
       return next(
         new AppError(
-          "One of the entered emails is incorrect or the teammate hasn't singed up",
+          `${req.body.teamMate2Email} email is incorrect or the teammate hasn't singed up`,
           412,
           errorCodes.NOT_SIGNED_UP
         )
@@ -220,7 +220,7 @@ exports.createTeam = catchAsync(async (req, res, next) => {
     if (teamMate2.registeredEvents[eventCodes.YANTRA] === 0) {
       return next(
         new AppError(
-          "One of the team mates not registered for yantra",
+          `${req.body.teamMate2Email} not registered for yantra`,
           412,
           errorCodes.ONE_OF_THE_TEAM_MATES_NOT_REGISTERED_FOR_YANTRA
         )
@@ -230,7 +230,7 @@ exports.createTeam = catchAsync(async (req, res, next) => {
     if (teamMate2.yantraTeamId || teamMate2.yantraTeamRole) {
       return next(
         new AppError(
-          "One of the team mates already Part of a yantraTeams",
+          `${req.body.teamMate2Email} already Part of a yantraTeam`,
           412,
           errorCodes.ONE_OF_THE_TEAM_MATES_ALREADY_IN_YANTRA_TEAM
         )
@@ -251,7 +251,7 @@ exports.createTeam = catchAsync(async (req, res, next) => {
     if (request) {
       return next(
         new AppError(
-          "For one of the teammates -> Remove Requests Sent to other Teams to Create a NewTeam",
+          `${req.body.teamMate2Email} -> Remove Requests Sent to other Teams to Create a NewTeam`,
           412,
           errorCodes.ONE_OF_THE_TEAM_MATES_HAVE_PENDING_REQUESTS
         )
@@ -262,7 +262,7 @@ exports.createTeam = catchAsync(async (req, res, next) => {
     if (requestByLeader) {
       return next(
         new AppError(
-          "For one of the teammates -> Remove Requests by other Leaders to Create a NewTeam",
+          `${req.body.teamMate2Email} -> Remove Requests by other Leaders to Create a NewTeam`,
           412,
           errorCodes.ONE_OF_THE_TEAM_MATES_HAVE_PENDING_REQUESTS
         )
@@ -277,7 +277,7 @@ exports.createTeam = catchAsync(async (req, res, next) => {
     if (!teamMate3) {
       return next(
         new AppError(
-          "One of the entered emails is incorrect or the teammate hasn't singed up",
+          `${req.body.teamMate3Email} email is incorrect or the teammate hasn't singed up`,
           412,
           errorCodes.NOT_SIGNED_UP
         )
@@ -287,7 +287,7 @@ exports.createTeam = catchAsync(async (req, res, next) => {
     if (teamMate3.registeredEvents[eventCodes.YANTRA] === 0) {
       return next(
         new AppError(
-          "One of the team mates not registered for yantra",
+          `${req.body.teamMate3Email} not registered for yantra`,
           412,
           errorCodes.ONE_OF_THE_TEAM_MATES_NOT_REGISTERED_FOR_YANTRA
         )
@@ -297,7 +297,7 @@ exports.createTeam = catchAsync(async (req, res, next) => {
     if (teamMate3.yantraTeamId || teamMate3.yantraTeamRole) {
       return next(
         new AppError(
-          "One of the team mates already Part of a yantraTeams",
+          `${req.body.teamMate3Email} already Part of a yantraTeam`,
           412,
           errorCodes.ONE_OF_THE_TEAM_MATES_ALREADY_IN_YANTRA_TEAM
         )
@@ -318,7 +318,7 @@ exports.createTeam = catchAsync(async (req, res, next) => {
     if (request) {
       return next(
         new AppError(
-          "For one of the teammates -> Remove Requests Sent to other Teams to Create a NewTeam",
+          `${req.body.teamMate3Email} -> Remove Requests Sent to other Teams to Create a NewTeam`,
           412,
           errorCodes.ONE_OF_THE_TEAM_MATES_HAVE_PENDING_REQUESTS
         )
@@ -329,7 +329,7 @@ exports.createTeam = catchAsync(async (req, res, next) => {
     if (requestByLeader) {
       return next(
         new AppError(
-          "For one of the teammates -> Remove Requests by other Leaders to Create a NewTeam",
+          `${req.body.teamMate3Email} -> Remove Requests by other Leaders to Create a NewTeam`,
           412,
           errorCodes.ONE_OF_THE_TEAM_MATES_HAVE_PENDING_REQUESTS
         )
