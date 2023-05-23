@@ -9,7 +9,7 @@ module.exports = {
         .length(10)
         .pattern(/^[0-9]+$/)
         .required(),
-      regNo: Joi.string(),
+      regNo: Joi.string().required(),
     });
     return schema.validate(body);
   },
