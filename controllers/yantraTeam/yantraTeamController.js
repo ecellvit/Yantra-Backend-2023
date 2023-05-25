@@ -38,20 +38,34 @@ exports.createTeam = catchAsync(async (req, res, next) => {
     );
   }
 
-  if (
-    req.body.teamMate1Email == req.body.teamMate2Email ||
-    req.body.teamMate1Email == req.body.teamMate3Email ||
-    req.body.teamMate2Email == req.body.teamMate3Email
-  ) {
-    return next(
-      new AppError(
-        "Team members should have different emails",
-        412,
-        errorCodes.TEAM_MEMBERS_SAME_EMAIL
-      )
-    );
+  if (req.body.teamMate2Email) {
+    if (req.body.teamMate1Email == req.body.teamMate2Email) {
+      return next(
+        new AppError(
+          "Team members should have different emails",
+          412,
+          errorCodes.TEAM_MEMBERS_SAME_EMAIL
+        )
+      );
+    }
   }
 
+  if (req.body.teamMate3Email) {
+    if (
+      req.body.teamMate1Email == req.body.teamMate2Email ||
+      req.body.teamMate1Email == req.body.teamMate3Email ||
+      req.body.teamMate2Email == req.body.teamMate3Email
+    ) {
+      return next(
+        new AppError(
+          "Team members should have different emails",
+          412,
+          errorCodes.TEAM_MEMBERS_SAME_EMAIL
+        )
+      );
+    }
+  }
+  
   //check whether teamname already taken
   const yantraTeam = await yantraTeams.findOne({
     teamName: req.body.teamName,
