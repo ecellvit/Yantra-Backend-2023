@@ -6,8 +6,8 @@ module.exports = {
     const schema = Joi.object({
       teamName: Joi.string().required(),
       teamMate1Email: Joi.string().email(),
-      teamMate2Email: Joi.string().email(),
-      teamMate3Email: Joi.string().email(),
+      teamMate2Email: Joi.string().email().allow(null, ""),
+      teamMate3Email: Joi.string().email().allow(null, ""),
     });
     return schema.validate(body);
   },
