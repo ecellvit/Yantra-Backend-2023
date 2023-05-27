@@ -521,7 +521,7 @@ exports.createTeam = catchAsync(async (req, res, next) => {
   transporter.sendMail(
     {
       from: process.env.NODEMAILER_EMAIL,
-      to: req.user.email,
+      to: user.email,
       subject: "Ignitia: Team Created Successfully!",
       html:
         "Greetings!" +
