@@ -9,7 +9,9 @@ const {
   signUpBodyValidation,
   logInBodyValidation,
 } = require("./validationSchema");
-
+const path = require("path");
+require("dotenv").config({ path: path.resolve(__dirname, "../.env") });
+const { transporter } = require("../../utils/nodemailer");
 const client = new OAuth2Client(process.env.CLIENT_ID);
 const bcrypt = require("bcrypt");
 
@@ -73,6 +75,30 @@ exports.googleAuth = catchAsync(async (req, res, next) => {
 
     const user = await User.findOne({ email: emailFromClient });
     const { accessToken } = await generateTokens(user);
+
+    transporter.sendMail({
+      from: process.env.NODEMAILER_EMAIL,
+      to: emailFromClient,
+      subject: "Ignitia: Registration Successful",
+      html:
+        "Greetings!" +
+        "<br>" +
+        "Congratulations on successfully creating an account on the Ignitia website!" +
+        "<br>" +
+        "Do note, that to be eligible to participate in the hackathon, you will require a team of at least two other members. But for the workshops, you can register as an individual." +
+        "<br>" +
+        "Wishing you the very best!" +
+        "<br>" +
+        "Regards," +
+        "<br>" +
+        "Team Ignitia",
+      auth: {
+        user: process.env.NODEMAILER_EMAIL,
+        refreshToken: process.env.NODEMAILER_REFRESH_TOKEN,
+        accessToken: process.env.NODEMAILER_ACCESS_TOKEN,
+        expires: 3599,
+      },
+    });
 
     return res.status(201).json({
       message: "User SignUp Succesfull",

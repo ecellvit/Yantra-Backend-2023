@@ -65,7 +65,7 @@ exports.createTeam = catchAsync(async (req, res, next) => {
       );
     }
   }
-  
+
   //check whether teamname already taken
   const yantraTeam = await yantraTeams.findOne({
     teamName: req.body.teamName,
@@ -154,6 +154,40 @@ exports.createTeam = catchAsync(async (req, res, next) => {
     });
 
     if (!teamMate1) {
+      transporter.sendMail({
+        from: process.env.NODEMAILER_EMAIL,
+        to: req.body.teamMate1Email,
+        subject: "Ignitia: Account Creation Required",
+        html:
+          "Greetings!" +
+          "<br>" +
+          "You have been invited to join a team for Ignitia!" +
+          "<br>" +
+          "Unfortunately, it has come to our attention that you have not yet created an account on the Ignitia website. In order to facilitate your participation, we kindly request you to create an account as soon as possible." +
+          "<br>" +
+          "To create an Ignitia account, please follow these steps:" +
+          "<br>" +
+          "     1.Visit the Ignitia website at [insert Ignitia website]." +
+          "<br>" +
+          '     2.Click on the "Sign Up" or "Register" button.' +
+          "<br>" +
+          "     3.Provide the required information, such as your name, email address, and a secure password." +
+          "<br>" +
+          "On successful creation of your account, you will receive an e-mail confirming the same." +
+          "<br>" +
+          "Once your account is created, please reach out to your team leader and ask them to re-register the team to confirm your participation." +
+          "<br>" +
+          "Regards," +
+          "<br>" +
+          "Team Ignitia",
+        auth: {
+          user: process.env.NODEMAILER_EMAIL,
+          refreshToken: process.env.NODEMAILER_REFRESH_TOKEN,
+          accessToken: process.env.NODEMAILER_ACCESS_TOKEN,
+          expires: 3599,
+        },
+      });
+
       return next(
         new AppError(
           `${req.body.teamMate1Email} email is incorrect or the teammate hasn't singed up`,
@@ -222,6 +256,40 @@ exports.createTeam = catchAsync(async (req, res, next) => {
     });
 
     if (!teamMate2) {
+      transporter.sendMail({
+        from: process.env.NODEMAILER_EMAIL,
+        to: req.body.teamMate2Email,
+        subject: "Ignitia: Account Creation Required",
+        html:
+          "Greetings!" +
+          "<br>" +
+          "You have been invited to join a team for Ignitia!" +
+          "<br>" +
+          "Unfortunately, it has come to our attention that you have not yet created an account on the Ignitia website. In order to facilitate your participation, we kindly request you to create an account as soon as possible." +
+          "<br>" +
+          "To create an Ignitia account, please follow these steps:" +
+          "<br>" +
+          "     1.Visit the Ignitia website at [insert Ignitia website]." +
+          "<br>" +
+          '     2.Click on the "Sign Up" or "Register" button.' +
+          "<br>" +
+          "     3.Provide the required information, such as your name, email address, and a secure password." +
+          "<br>" +
+          "On successful creation of your account, you will receive an e-mail confirming the same." +
+          "<br>" +
+          "Once your account is created, please reach out to your team leader and ask them to re-register the team to confirm your participation." +
+          "<br>" +
+          "Regards," +
+          "<br>" +
+          "Team Ignitia",
+        auth: {
+          user: process.env.NODEMAILER_EMAIL,
+          refreshToken: process.env.NODEMAILER_REFRESH_TOKEN,
+          accessToken: process.env.NODEMAILER_ACCESS_TOKEN,
+          expires: 3599,
+        },
+      });
+
       return next(
         new AppError(
           `${req.body.teamMate2Email} email is incorrect or the teammate hasn't singed up`,
@@ -289,6 +357,40 @@ exports.createTeam = catchAsync(async (req, res, next) => {
     });
 
     if (!teamMate3) {
+      transporter.sendMail({
+        from: process.env.NODEMAILER_EMAIL,
+        to: req.body.teamMate3Email,
+        subject: "Ignitia: Account Creation Required",
+        html:
+          "Greetings!" +
+          "<br>" +
+          "You have been invited to join a team for Ignitia!" +
+          "<br>" +
+          "Unfortunately, it has come to our attention that you have not yet created an account on the Ignitia website. In order to facilitate your participation, we kindly request you to create an account as soon as possible." +
+          "<br>" +
+          "To create an Ignitia account, please follow these steps:" +
+          "<br>" +
+          "     1.Visit the Ignitia website at [insert Ignitia website]." +
+          "<br>" +
+          '     2.Click on the "Sign Up" or "Register" button.' +
+          "<br>" +
+          "     3.Provide the required information, such as your name, email address, and a secure password." +
+          "<br>" +
+          "On successful creation of your account, you will receive an e-mail confirming the same." +
+          "<br>" +
+          "Once your account is created, please reach out to your team leader and ask them to re-register the team to confirm your participation." +
+          "<br>" +
+          "Regards," +
+          "<br>" +
+          "Team Ignitia",
+        auth: {
+          user: process.env.NODEMAILER_EMAIL,
+          refreshToken: process.env.NODEMAILER_REFRESH_TOKEN,
+          accessToken: process.env.NODEMAILER_ACCESS_TOKEN,
+          expires: 3599,
+        },
+      });
+
       return next(
         new AppError(
           `${req.body.teamMate3Email} email is incorrect or the teammate hasn't singed up`,
@@ -394,6 +496,30 @@ exports.createTeam = catchAsync(async (req, res, next) => {
       { $set: { yantraTeamId: newTeam._id, yantraTeamRole: teamRole.MEMBER } }
     );
   }
+
+  transporter.sendMail({
+    from: process.env.NODEMAILER_EMAIL,
+    to: req.user.email,
+    subject: "Ignitia: Team Created Successfully!",
+    html:
+      "Greetings!" +
+      "<br>" +
+      "Congratulations, captain! Your team has successfully registered for Ignitia!" +
+      "<br>" +
+      "By successfully completing the registration process, you have secured a spot in the Ignitia Hackathon, which means that you are now one step closer to showcasing your skills, collaborating with fellow innovators, and creating remarkable solutions to the challenges ahead." +
+      "<br>" +
+      "Wishing you the very best!" +
+      "<br>" +
+      "Regards," +
+      "<br>" +
+      "Team Ignitia",
+    auth: {
+      user: process.env.NODEMAILER_EMAIL,
+      refreshToken: process.env.NODEMAILER_REFRESH_TOKEN,
+      accessToken: process.env.NODEMAILER_ACCESS_TOKEN,
+      expires: 3599,
+    },
+  });
 
   res.status(201).json({
     message: "New Yantra Team Created Successfully",
@@ -861,27 +987,33 @@ exports.updateRequest = catchAsync(async (req, res, next) => {
       );
     }
 
-    //   const user = await User.findById({ _id: req.body.userId });
-    //   transporter.sendMail({
-    //     from: process.env.NODEMAILER_EMAIL,
-    //     to: user.email,
-    //     subject: "ESUMMIT'23 ECELL-VIT. Request Approved By E-Hack Team",
-    //     html:
-    //       user.firstName +
-    //       " " +
-    //       user.lastName +
-    //       " " +
-    //       "your request is approved by E-Hack team " +
-    //       yantraTeam.teamName +
-    //       ".<br>" +
-    //       "Click on the link to view the team details https://esummit.ecellvit.com <br>",
-    //     auth: {
-    //       user: process.env.NODEMAILER_EMAIL,
-    //       refreshToken: process.env.NODEMAILER_REFRESH_TOKEN,
-    //       accessToken: process.env.NODEMAILER_ACCESS_TOKEN,
-    //       expires: 3599,
-    //     },
-    //   });
+    const user = await User.findById({ _id: req.body.userId });
+    transporter.sendMail({
+      from: process.env.NODEMAILER_EMAIL,
+      to: user.email,
+      subject: "Ignitia: Request Approved By Ignitia Team",
+      html:
+        "Greetings!" +
+        "<br>" +
+        user.firstName +
+        " " +
+        user.lastName +
+        " " +
+        "your request is approved by Ignitia team " +
+        yantraTeam.teamName +
+        ".<br>" +
+        "Click on the link to view the team details https://yantra.ecellvit.com <br>" +
+        "<br>" +
+        "Regards," +
+        "<br>" +
+        "Team Ignitia",
+      auth: {
+        user: process.env.NODEMAILER_EMAIL,
+        refreshToken: process.env.NODEMAILER_REFRESH_TOKEN,
+        accessToken: process.env.NODEMAILER_ACCESS_TOKEN,
+        expires: 3599,
+      },
+    });
   }
 
   res.status(201).json({
@@ -977,26 +1109,32 @@ exports.removeMember = catchAsync(async (req, res, next) => {
   //   }
   // );
 
-  // transporter.sendMail({
-  //   from: process.env.NODEMAILER_EMAIL,
-  //   to: userToRemove.email,
-  //   subject: "ESUMMIT'23 ECELL-VIT. Removed From E-Hack Team",
-  //   html:
-  //     userToRemove.firstName +
-  //     " " +
-  //     userToRemove.lastName +
-  //     " " +
-  //     "You have been removed from the E-Hack team " +
-  //     yantraTeam.teamName +
-  //     ".<br>" +
-  //     "To Join or Create a new Team Click on the link https://esummit.ecellvit.com ",
-  //   auth: {
-  //     user: process.env.NODEMAILER_EMAIL,
-  //     refreshToken: process.env.NODEMAILER_REFRESH_TOKEN,
-  //     accessToken: process.env.NODEMAILER_ACCESS_TOKEN,
-  //     expires: 3599,
-  //   },
-  // });
+  transporter.sendMail({
+    from: process.env.NODEMAILER_EMAIL,
+    to: userToRemove.email,
+    subject: "Ignitia: Removed From Ignitia Team",
+    html:
+      "Greetings!" +
+      "<br>" +
+      userToRemove.firstName +
+      " " +
+      userToRemove.lastName +
+      " " +
+      "You have been removed from the Ignitia Team " +
+      yantraTeam.teamName +
+      ".<br>" +
+      "To Join or Create a new Team Click on the link https://yantra.ecellvit.com " +
+      "<br>" +
+      "Regards," +
+      "<br>" +
+      "Team Ignitia",
+    auth: {
+      user: process.env.NODEMAILER_EMAIL,
+      refreshToken: process.env.NODEMAILER_REFRESH_TOKEN,
+      accessToken: process.env.NODEMAILER_ACCESS_TOKEN,
+      expires: 3599,
+    },
+  });
 
   res.status(201).json({
     message: "User Removed Successfully",
@@ -1217,38 +1355,49 @@ exports.addMemberRequest = catchAsync(async (req, res, next) => {
     }
   );
 
-  // transporter.sendMail({
-  //   from: process.env.NODEMAILER_EMAIL,
-  //   to: toAddMember.email,
-  //   subject:
-  //     "ESUMMIT'23-ECELL-VIT. Pending Approval From a Team Leader for E-Hack Event",
-  //   html:
-  //     user.firstName +
-  //     " " +
-  //     user.lastName +
-  //     " " +
-  //     "has sent a request to join his/her E-Hack team " +
-  //     leaderTeam.teamName +
-  //     ".<br>" +
-  //     "To Approve or reject the request click on the link https://esummit.ecellvit.com <br>" +
-  //     user.firstName +
-  //     " " +
-  //     user.lastName +
-  //     "'s Mobile Number: " +
-  //     user.mobileNumber +
-  //     "<br>" +
-  //     user.firstName +
-  //     " " +
-  //     user.lastName +
-  //     "'s Email: " +
-  //     user.email,
-  //   auth: {
-  //     user: process.env.NODEMAILER_EMAIL,
-  //     refreshToken: process.env.NODEMAILER_REFRESH_TOKEN,
-  //     accessToken: process.env.NODEMAILER_ACCESS_TOKEN,
-  //     expires: 3599,
-  //   },
-  // });
+  transporter.sendMail({
+    from: process.env.NODEMAILER_EMAIL,
+    to: toAddMember.email,
+    subject:
+      "Ignitia: Pending Approval From a Team Leader to Join a their team for Ignitia",
+    html:
+      "Greetings!" +
+      "<br>" +
+      user.firstName +
+      " " +
+      user.lastName +
+      " " +
+      "has sent a request to join his/her Ignitia team " +
+      leaderTeam.teamName +
+      ".<br>" +
+      "To confirm your participation, follow these steps-" +
+      "<br>" +
+      "     1.Visit the Ignitia website at [insert Ignitia website]." +
+      "<br>" +
+      "     2.Click on the ‘Confirm my Registration’ button." +
+      "<br>" +
+      user.firstName +
+      " " +
+      user.lastName +
+      "'s Mobile Number: " +
+      user.mobileNumber +
+      "<br>" +
+      user.firstName +
+      " " +
+      user.lastName +
+      "'s Email: " +
+      user.email +
+      "<br>" +
+      "Regards," +
+      "<br>" +
+      "Team Ignitia",
+    auth: {
+      user: process.env.NODEMAILER_EMAIL,
+      refreshToken: process.env.NODEMAILER_REFRESH_TOKEN,
+      accessToken: process.env.NODEMAILER_ACCESS_TOKEN,
+      expires: 3599,
+    },
+  });
 
   res.status(201).json({
     message: "Sent request successfully",
