@@ -268,7 +268,7 @@ exports.createTeam = catchAsync(async (req, res, next) => {
     transporter.sendMail(
       {
         from: process.env.NODEMAILER_EMAIL,
-        to: req.body.teamMate2Email,
+        to: req.body.teamMate3Email,
         subject: "Ignitia: Account Creation Required",
         html:
           "Greetings!" +
