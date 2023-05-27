@@ -85,7 +85,7 @@ exports.registerEvent = catchAsync(async (req, res, next) => {
     transporter.sendMail(
       {
         from: process.env.NODEMAILER_EMAIL,
-        to: req.body.teamMate2Email,
+        to: req.user.email,
         subject: "Ignitia:  Registration Successful",
         html:
           "Greetings!" +
