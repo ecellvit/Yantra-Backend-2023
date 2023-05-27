@@ -82,29 +82,36 @@ exports.registerEvent = catchAsync(async (req, res, next) => {
       }
     );
 
-    transporter.sendMail({
-      from: process.env.NODEMAILER_EMAIL,
-      to: req.body.teamMate2Email,
-      subject: "Ignitia:  Registration Successful",
-      html:
-        "Greetings!" +
-        "<br>" +
-        `Congratulations, you have successfully registered for ${eventName}` +
-        "<br>" +
-        `By successfully completing the registration process, you have secured a spot in the ${eventName}, which means that you are now one step closer to honing your skills and creating remarkable solutions to challenges ahead` +
-        "<br>" +
-        "Wishing you the very best!" +
-        "<br>" +
-        "Regards," +
-        "<br>" +
-        "Team Ignitia",
-      auth: {
-        user: process.env.NODEMAILER_EMAIL,
-        refreshToken: process.env.NODEMAILER_REFRESH_TOKEN,
-        accessToken: process.env.NODEMAILER_ACCESS_TOKEN,
-        expires: 3599,
+    transporter.sendMail(
+      {
+        from: process.env.NODEMAILER_EMAIL,
+        to: req.body.teamMate2Email,
+        subject: "Ignitia:  Registration Successful",
+        html:
+          "Greetings!" +
+          "<br>" +
+          `Congratulations, you have successfully registered for ${eventName}` +
+          "<br>" +
+          `By successfully completing the registration process, you have secured a spot in the ${eventName}, which means that you are now one step closer to honing your skills and creating remarkable solutions to challenges ahead` +
+          "<br>" +
+          "Wishing you the very best!" +
+          "<br>" +
+          "Regards," +
+          "<br>" +
+          "Team Ignitia",
+        auth: {
+          user: process.env.NODEMAILER_EMAIL,
+          refreshToken: process.env.NODEMAILER_REFRESH_TOKEN,
+          accessToken: process.env.NODEMAILER_ACCESS_TOKEN,
+          expires: 3599,
+        },
       },
-    });
+      (err, success) => {
+        if (err) {
+          console.log(err);
+        }
+      }
+    );
   }
 
   // to unregister
@@ -249,43 +256,50 @@ exports.yantraSendRequest = catchAsync(async (req, res, next) => {
   );
 
   const teamLeader = await User.findById({ _id: yantraTeam.teamLeaderId });
-  transporter.sendMail({
-    from: process.env.NODEMAILER_EMAIL,
-    to: teamLeader.email,
-    subject: "Ignitia: Pending Approval From a Participant for Ignitia Event",
-    html:
-      "Greetings!" +
-      "<br>" +
-      user.firstName +
-      " " +
-      user.lastName +
-      " " +
-      "has sent a request to join your Ignitia team " +
-      yantraTeam.teamName +
-      ".<br>" +
-      "To Approve or reject the request click on the link https://yantra.ecellvit.com  <br>" +
-      user.firstName +
-      " " +
-      user.lastName +
-      "'s Mobile Number: " +
-      user.mobileNumber +
-      "<br>" +
-      user.firstName +
-      " " +
-      user.lastName +
-      "'s Email: " +
-      user.email +
-      "<br>" +
-      "Regards," +
-      "<br>" +
-      "Team Ignitia",
-    auth: {
-      user: process.env.NODEMAILER_EMAIL,
-      refreshToken: process.env.NODEMAILER_REFRESH_TOKEN,
-      accessToken: process.env.NODEMAILER_ACCESS_TOKEN,
-      expires: 3599,
+  transporter.sendMail(
+    {
+      from: process.env.NODEMAILER_EMAIL,
+      to: teamLeader.email,
+      subject: "Ignitia: Pending Approval From a Participant for Ignitia Event",
+      html:
+        "Greetings!" +
+        "<br>" +
+        user.firstName +
+        " " +
+        user.lastName +
+        " " +
+        "has sent a request to join your Ignitia team " +
+        yantraTeam.teamName +
+        ".<br>" +
+        "To Approve or reject the request click on the link https://yantra.ecellvit.com  <br>" +
+        user.firstName +
+        " " +
+        user.lastName +
+        "'s Mobile Number: " +
+        user.mobileNumber +
+        "<br>" +
+        user.firstName +
+        " " +
+        user.lastName +
+        "'s Email: " +
+        user.email +
+        "<br>" +
+        "Regards," +
+        "<br>" +
+        "Team Ignitia",
+      auth: {
+        user: process.env.NODEMAILER_EMAIL,
+        refreshToken: process.env.NODEMAILER_REFRESH_TOKEN,
+        accessToken: process.env.NODEMAILER_ACCESS_TOKEN,
+        expires: 3599,
+      },
     },
-  });
+    (err, success) => {
+      if (err) {
+        console.log(err);
+      }
+    }
+  );
 
   res.status(201).json({
     message: "Sent request successfully",
@@ -876,34 +890,42 @@ exports.yantraUpdateMemberRequest = catchAsync(async (req, res, next) => {
     }
 
     const teamLeader = await User.findById({ _id: teamLeaderId });
-    transporter.sendMail({
-      from: process.env.NODEMAILER_EMAIL,
-      to: teamLeader.email,
-      subject: "Ignitia: Request Approved By the Ignitia Participant",
-      html:
-        "Greetings!" +
-        "<br>" +
-        teamLeader.firstName +
-        " " +
-        teamLeader.lastName +
-        " " +
-        "your request is approved by the Ignitia Participant " +
-        user.firstName +
-        " " +
-        user.lastName +
-        ".<br>" +
-        "Click on the link to view the team details https://yantra.ecellvit.com  <br>" +
-        "<br>" +
-        "Regards," +
-        "<br>" +
-        "Team Ignitia",
-      auth: {
-        user: process.env.NODEMAILER_EMAIL,
-        refreshToken: process.env.NODEMAILER_REFRESH_TOKEN,
-        accessToken: process.env.NODEMAILER_ACCESS_TOKEN,
-        expires: 3599,
+
+    transporter.sendMail(
+      {
+        from: process.env.NODEMAILER_EMAIL,
+        to: teamLeader.email,
+        subject: "Ignitia: Request Approved By the Ignitia Participant",
+        html:
+          "Greetings!" +
+          "<br>" +
+          teamLeader.firstName +
+          " " +
+          teamLeader.lastName +
+          " " +
+          "your request is approved by the Ignitia Participant " +
+          user.firstName +
+          " " +
+          user.lastName +
+          ".<br>" +
+          "Click on the link to view the team details https://yantra.ecellvit.com  <br>" +
+          "<br>" +
+          "Regards," +
+          "<br>" +
+          "Team Ignitia",
+        auth: {
+          user: process.env.NODEMAILER_EMAIL,
+          refreshToken: process.env.NODEMAILER_REFRESH_TOKEN,
+          accessToken: process.env.NODEMAILER_ACCESS_TOKEN,
+          expires: 3599,
+        },
       },
-    });
+      (err, success) => {
+        if (err) {
+          console.log(err);
+        }
+      }
+    );
   }
 
   res.status(201).json({
