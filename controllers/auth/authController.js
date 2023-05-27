@@ -84,11 +84,15 @@ exports.googleAuth = catchAsync(async (req, res, next) => {
         html:
           "Greetings!" +
           "<br>" +
+          "<br>" +
           "Congratulations on successfully creating an account on the Ignitia website!" +
+          "<br>" +
           "<br>" +
           "Do note, that to be eligible to participate in the hackathon, you will require a team of at least two other members. But for the workshops, you can register as an individual." +
           "<br>" +
+          "<br>" +
           "Wishing you the very best!" +
+          "<br>" +
           "<br>" +
           "Regards," +
           "<br>" +

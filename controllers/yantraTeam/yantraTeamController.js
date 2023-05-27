@@ -162,9 +162,12 @@ exports.createTeam = catchAsync(async (req, res, next) => {
           html:
             "Greetings!" +
             "<br>" +
+            "<br>" +
             "You have been invited to join a team for Ignitia!" +
             "<br>" +
+            "<br>" +
             "Unfortunately, it has come to our attention that you have not yet created an account on the Ignitia website. In order to facilitate your participation, we kindly request you to create an account as soon as possible." +
+            "<br>" +
             "<br>" +
             "To create an Ignitia account, please follow these steps:" +
             "<br>" +
@@ -174,9 +177,12 @@ exports.createTeam = catchAsync(async (req, res, next) => {
             "<br>" +
             "     3.Provide the required information, such as your name, email address, and a secure password." +
             "<br>" +
+            "<br>" +
             "On successful creation of your account, you will receive an e-mail confirming the same." +
             "<br>" +
+            "<br>" +
             "Once your account is created, please reach out to your team leader and ask them to re-register the team to confirm your participation." +
+            "<br>" +
             "<br>" +
             "Regards," +
             "<br>" +
@@ -271,9 +277,12 @@ exports.createTeam = catchAsync(async (req, res, next) => {
           html:
             "Greetings!" +
             "<br>" +
+            "<br>" +
             "You have been invited to join a team for Ignitia!" +
             "<br>" +
+            "<br>" +
             "Unfortunately, it has come to our attention that you have not yet created an account on the Ignitia website. In order to facilitate your participation, we kindly request you to create an account as soon as possible." +
+            "<br>" +
             "<br>" +
             "To create an Ignitia account, please follow these steps:" +
             "<br>" +
@@ -283,9 +292,12 @@ exports.createTeam = catchAsync(async (req, res, next) => {
             "<br>" +
             "     3.Provide the required information, such as your name, email address, and a secure password." +
             "<br>" +
+            "<br>" +
             "On successful creation of your account, you will receive an e-mail confirming the same." +
             "<br>" +
+            "<br>" +
             "Once your account is created, please reach out to your team leader and ask them to re-register the team to confirm your participation." +
+            "<br>" +
             "<br>" +
             "Regards," +
             "<br>" +
@@ -379,9 +391,12 @@ exports.createTeam = catchAsync(async (req, res, next) => {
           html:
             "Greetings!" +
             "<br>" +
+            "<br>" +
             "You have been invited to join a team for Ignitia!" +
             "<br>" +
+            "<br>" +
             "Unfortunately, it has come to our attention that you have not yet created an account on the Ignitia website. In order to facilitate your participation, we kindly request you to create an account as soon as possible." +
+            "<br>" +
             "<br>" +
             "To create an Ignitia account, please follow these steps:" +
             "<br>" +
@@ -391,9 +406,12 @@ exports.createTeam = catchAsync(async (req, res, next) => {
             "<br>" +
             "     3.Provide the required information, such as your name, email address, and a secure password." +
             "<br>" +
+            "<br>" +
             "On successful creation of your account, you will receive an e-mail confirming the same." +
             "<br>" +
+            "<br>" +
             "Once your account is created, please reach out to your team leader and ask them to re-register the team to confirm your participation." +
+            "<br>" +
             "<br>" +
             "Regards," +
             "<br>" +
@@ -526,11 +544,15 @@ exports.createTeam = catchAsync(async (req, res, next) => {
       html:
         "Greetings!" +
         "<br>" +
+        "<br>" +
         "Congratulations, captain! Your team has successfully registered for Ignitia!" +
+        "<br>" +
         "<br>" +
         "By successfully completing the registration process, you have secured a spot in the Ignitia Hackathon, which means that you are now one step closer to showcasing your skills, collaborating with fellow innovators, and creating remarkable solutions to the challenges ahead." +
         "<br>" +
+        "<br>" +
         "Wishing you the very best!" +
+        "<br>" +
         "<br>" +
         "Regards," +
         "<br>" +
@@ -1024,6 +1046,7 @@ exports.updateRequest = catchAsync(async (req, res, next) => {
         html:
           "Greetings!" +
           "<br>" +
+          "<br>" +
           user.firstName +
           " " +
           user.lastName +
@@ -1031,7 +1054,9 @@ exports.updateRequest = catchAsync(async (req, res, next) => {
           "your request is approved by Ignitia team " +
           yantraTeam.teamName +
           ".<br>" +
+          "<br>" +
           "Click on the link to view the team details https://yantra.ecellvit.com <br>" +
+          "<br>" +
           "<br>" +
           "Regards," +
           "<br>" +
@@ -1152,6 +1177,7 @@ exports.removeMember = catchAsync(async (req, res, next) => {
       html:
         "Greetings!" +
         "<br>" +
+        "<br>" +
         userToRemove.firstName +
         " " +
         userToRemove.lastName +
@@ -1159,7 +1185,9 @@ exports.removeMember = catchAsync(async (req, res, next) => {
         "You have been removed from the Ignitia Team " +
         yantraTeam.teamName +
         ".<br>" +
+        "<br>" +
         "To Join or Create a new Team Click on the link https://yantra.ecellvit.com " +
+        "<br>" +
         "<br>" +
         "Regards," +
         "<br>" +
@@ -1406,6 +1434,7 @@ exports.addMemberRequest = catchAsync(async (req, res, next) => {
       html:
         "Greetings!" +
         "<br>" +
+        "<br>" +
         user.firstName +
         " " +
         user.lastName +
@@ -1413,11 +1442,13 @@ exports.addMemberRequest = catchAsync(async (req, res, next) => {
         "has sent a request to join his/her Ignitia team " +
         leaderTeam.teamName +
         ".<br>" +
+        "<br>" +
         "To confirm your participation, follow these steps-" +
         "<br>" +
         "     1.Visit the Ignitia website at [insert Ignitia website]." +
         "<br>" +
         "     2.Click on the ‘Confirm my Registration’ button." +
+        "<br>" +
         "<br>" +
         user.firstName +
         " " +
@@ -1430,6 +1461,7 @@ exports.addMemberRequest = catchAsync(async (req, res, next) => {
         user.lastName +
         "'s Email: " +
         user.email +
+        "<br>" +
         "<br>" +
         "Regards," +
         "<br>" +

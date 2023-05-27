@@ -90,11 +90,15 @@ exports.registerEvent = catchAsync(async (req, res, next) => {
         html:
           "Greetings!" +
           "<br>" +
+          "<br>" +
           `Congratulations, you have successfully registered for ${eventName}` +
+          "<br>" +
           "<br>" +
           `By successfully completing the registration process, you have secured a spot in the ${eventName}, which means that you are now one step closer to honing your skills and creating remarkable solutions to challenges ahead` +
           "<br>" +
+          "<br>" +
           "Wishing you the very best!" +
+          "<br>" +
           "<br>" +
           "Regards," +
           "<br>" +
@@ -264,6 +268,7 @@ exports.yantraSendRequest = catchAsync(async (req, res, next) => {
       html:
         "Greetings!" +
         "<br>" +
+        "<br>" +
         user.firstName +
         " " +
         user.lastName +
@@ -271,6 +276,7 @@ exports.yantraSendRequest = catchAsync(async (req, res, next) => {
         "has sent a request to join your Ignitia team " +
         yantraTeam.teamName +
         ".<br>" +
+        "<br>" +
         "To Approve or reject the request click on the link https://yantra.ecellvit.com  <br>" +
         user.firstName +
         " " +
@@ -283,6 +289,7 @@ exports.yantraSendRequest = catchAsync(async (req, res, next) => {
         user.lastName +
         "'s Email: " +
         user.email +
+        "<br>" +
         "<br>" +
         "Regards," +
         "<br>" +
@@ -899,6 +906,7 @@ exports.yantraUpdateMemberRequest = catchAsync(async (req, res, next) => {
         html:
           "Greetings!" +
           "<br>" +
+          "<br>" +
           teamLeader.firstName +
           " " +
           teamLeader.lastName +
@@ -908,7 +916,9 @@ exports.yantraUpdateMemberRequest = catchAsync(async (req, res, next) => {
           " " +
           user.lastName +
           ".<br>" +
+          "<br>" +
           "Click on the link to view the team details https://yantra.ecellvit.com  <br>" +
+          "<br>" +
           "<br>" +
           "Regards," +
           "<br>" +
