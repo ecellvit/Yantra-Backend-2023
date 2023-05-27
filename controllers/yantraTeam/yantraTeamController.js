@@ -152,60 +152,174 @@ exports.createTeam = catchAsync(async (req, res, next) => {
     teamMate1 = await User.findOne({
       email: req.body.teamMate1Email,
     });
+  }
 
-    if (!teamMate1) {
-      transporter.sendMail(
-        {
-          from: process.env.NODEMAILER_EMAIL,
-          to: req.body.teamMate1Email,
-          subject: "Ignitia: Account Creation Required",
-          html:
-            "Greetings!" +
-            "<br>" +
-            "<br>" +
-            "You have been invited to join a team for Ignitia!" +
-            "<br>" +
-            "<br>" +
-            "Unfortunately, it has come to our attention that you have not yet created an account on the Ignitia website. In order to facilitate your participation, we kindly request you to create an account as soon as possible." +
-            "<br>" +
-            "<br>" +
-            "To create an Ignitia account, please follow these steps:" +
-            "<br>" +
-            "     1.Visit the Ignitia website at [insert Ignitia website]." +
-            "<br>" +
-            '     2.Click on the "Sign Up" or "Register" button.' +
-            "<br>" +
-            "     3.Provide the required information, such as your name, email address, and a secure password." +
-            "<br>" +
-            "<br>" +
-            "On successful creation of your account, you will receive an e-mail confirming the same." +
-            "<br>" +
-            "<br>" +
-            "Once your account is created, please reach out to your team leader and ask them to re-register the team to confirm your participation." +
-            "<br>" +
-            "<br>" +
-            "Regards," +
-            "<br>" +
-            "Team Ignitia",
-          auth: {
-            user: process.env.NODEMAILER_EMAIL,
-            refreshToken: process.env.NODEMAILER_REFRESH_TOKEN,
-            accessToken: process.env.NODEMAILER_ACCESS_TOKEN,
-            expires: 3599,
-          },
+  if (req.body.teamMate2Email) {
+    teamMate2 = await User.findOne({
+      email: req.body.teamMate2Email,
+    });
+  }
+
+  if (req.body.teamMate3Email) {
+    teamMate3 = await User.findOne({
+      email: req.body.teamMate3Email,
+    });
+  }
+
+  if (!teamMate1) {
+    transporter.sendMail(
+      {
+        from: process.env.NODEMAILER_EMAIL,
+        to: req.body.teamMate1Email,
+        subject: "Ignitia: Account Creation Required",
+        html:
+          "Greetings!" +
+          "<br>" +
+          "<br>" +
+          "You have been invited to join a team for Ignitia!" +
+          "<br>" +
+          "<br>" +
+          "Unfortunately, it has come to our attention that you have not yet created an account on the Ignitia website. In order to facilitate your participation, we kindly request you to create an account as soon as possible." +
+          "<br>" +
+          "<br>" +
+          "To create an Ignitia account, please follow these steps:" +
+          "<br>" +
+          "     1.Visit the Ignitia website at [insert Ignitia website]." +
+          "<br>" +
+          '     2.Click on the "Sign Up" or "Register" button.' +
+          "<br>" +
+          "     3.Provide the required information, such as your name, email address, and a secure password." +
+          "<br>" +
+          "<br>" +
+          "On successful creation of your account, you will receive an e-mail confirming the same." +
+          "<br>" +
+          "<br>" +
+          "Once your account is created, please reach out to your team leader and ask them to re-register the team to confirm your participation." +
+          "<br>" +
+          "<br>" +
+          "Regards," +
+          "<br>" +
+          "Team Ignitia",
+        auth: {
+          user: process.env.NODEMAILER_EMAIL,
+          refreshToken: process.env.NODEMAILER_REFRESH_TOKEN,
+          accessToken: process.env.NODEMAILER_ACCESS_TOKEN,
+          expires: 3599,
         },
-        (err, success) => {
-          if (err) {
-            console.log(err);
-          }
+      },
+      (err, success) => {
+        if (err) {
+          console.log(err);
         }
-      );
+      }
+    );
+  }
 
+  if (!teamMate2) {
+    transporter.sendMail(
+      {
+        from: process.env.NODEMAILER_EMAIL,
+        to: req.body.teamMate2Email,
+        subject: "Ignitia: Account Creation Required",
+        html:
+          "Greetings!" +
+          "<br>" +
+          "<br>" +
+          "You have been invited to join a team for Ignitia!" +
+          "<br>" +
+          "<br>" +
+          "Unfortunately, it has come to our attention that you have not yet created an account on the Ignitia website. In order to facilitate your participation, we kindly request you to create an account as soon as possible." +
+          "<br>" +
+          "<br>" +
+          "To create an Ignitia account, please follow these steps:" +
+          "<br>" +
+          "     1.Visit the Ignitia website at [insert Ignitia website]." +
+          "<br>" +
+          '     2.Click on the "Sign Up" or "Register" button.' +
+          "<br>" +
+          "     3.Provide the required information, such as your name, email address, and a secure password." +
+          "<br>" +
+          "<br>" +
+          "On successful creation of your account, you will receive an e-mail confirming the same." +
+          "<br>" +
+          "<br>" +
+          "Once your account is created, please reach out to your team leader and ask them to re-register the team to confirm your participation." +
+          "<br>" +
+          "<br>" +
+          "Regards," +
+          "<br>" +
+          "Team Ignitia",
+        auth: {
+          user: process.env.NODEMAILER_EMAIL,
+          refreshToken: process.env.NODEMAILER_REFRESH_TOKEN,
+          accessToken: process.env.NODEMAILER_ACCESS_TOKEN,
+          expires: 3599,
+        },
+      },
+      (err, success) => {
+        if (err) {
+          console.log(err);
+        }
+      }
+    );
+  }
+
+  if (!teamMate3) {
+    transporter.sendMail(
+      {
+        from: process.env.NODEMAILER_EMAIL,
+        to: req.body.teamMate2Email,
+        subject: "Ignitia: Account Creation Required",
+        html:
+          "Greetings!" +
+          "<br>" +
+          "<br>" +
+          "You have been invited to join a team for Ignitia!" +
+          "<br>" +
+          "<br>" +
+          "Unfortunately, it has come to our attention that you have not yet created an account on the Ignitia website. In order to facilitate your participation, we kindly request you to create an account as soon as possible." +
+          "<br>" +
+          "<br>" +
+          "To create an Ignitia account, please follow these steps:" +
+          "<br>" +
+          "     1.Visit the Ignitia website at [insert Ignitia website]." +
+          "<br>" +
+          '     2.Click on the "Sign Up" or "Register" button.' +
+          "<br>" +
+          "     3.Provide the required information, such as your name, email address, and a secure password." +
+          "<br>" +
+          "<br>" +
+          "On successful creation of your account, you will receive an e-mail confirming the same." +
+          "<br>" +
+          "<br>" +
+          "Once your account is created, please reach out to your team leader and ask them to re-register the team to confirm your participation." +
+          "<br>" +
+          "<br>" +
+          "Regards," +
+          "<br>" +
+          "Team Ignitia",
+        auth: {
+          user: process.env.NODEMAILER_EMAIL,
+          refreshToken: process.env.NODEMAILER_REFRESH_TOKEN,
+          accessToken: process.env.NODEMAILER_ACCESS_TOKEN,
+          expires: 3599,
+        },
+      },
+      (err, success) => {
+        if (err) {
+          console.log(err);
+        }
+      }
+    );
+  }
+
+  if (req.body.teamMate1Email) {
+    if (!teamMate1) {
       return next(
         new AppError(
-          `${req.body.teamMate1Email} email is incorrect or the teammate hasn't singed up`,
+          `${req.body.teamMate1Email} not registered for yantra`,
           412,
-          errorCodes.NOT_SIGNED_UP
+          errorCodes.ONE_OF_THE_TEAM_MATES_NOT_REGISTERED_FOR_YANTRA
         )
       );
     }
@@ -264,58 +378,7 @@ exports.createTeam = catchAsync(async (req, res, next) => {
   }
 
   if (req.body.teamMate2Email) {
-    teamMate2 = await User.findOne({
-      email: req.body.teamMate2Email,
-    });
-
     if (!teamMate2) {
-      transporter.sendMail(
-        {
-          from: process.env.NODEMAILER_EMAIL,
-          to: req.body.teamMate2Email,
-          subject: "Ignitia: Account Creation Required",
-          html:
-            "Greetings!" +
-            "<br>" +
-            "<br>" +
-            "You have been invited to join a team for Ignitia!" +
-            "<br>" +
-            "<br>" +
-            "Unfortunately, it has come to our attention that you have not yet created an account on the Ignitia website. In order to facilitate your participation, we kindly request you to create an account as soon as possible." +
-            "<br>" +
-            "<br>" +
-            "To create an Ignitia account, please follow these steps:" +
-            "<br>" +
-            "     1.Visit the Ignitia website at [insert Ignitia website]." +
-            "<br>" +
-            '     2.Click on the "Sign Up" or "Register" button.' +
-            "<br>" +
-            "     3.Provide the required information, such as your name, email address, and a secure password." +
-            "<br>" +
-            "<br>" +
-            "On successful creation of your account, you will receive an e-mail confirming the same." +
-            "<br>" +
-            "<br>" +
-            "Once your account is created, please reach out to your team leader and ask them to re-register the team to confirm your participation." +
-            "<br>" +
-            "<br>" +
-            "Regards," +
-            "<br>" +
-            "Team Ignitia",
-          auth: {
-            user: process.env.NODEMAILER_EMAIL,
-            refreshToken: process.env.NODEMAILER_REFRESH_TOKEN,
-            accessToken: process.env.NODEMAILER_ACCESS_TOKEN,
-            expires: 3599,
-          },
-        },
-        (err, success) => {
-          if (err) {
-            console.log(err);
-          }
-        }
-      );
-
       return next(
         new AppError(
           `${req.body.teamMate2Email} email is incorrect or the teammate hasn't singed up`,
@@ -377,59 +440,9 @@ exports.createTeam = catchAsync(async (req, res, next) => {
       );
     }
   }
+
   if (req.body.teamMate3Email) {
-    teamMate3 = await User.findOne({
-      email: req.body.teamMate3Email,
-    });
-
     if (!teamMate3) {
-      transporter.sendMail(
-        {
-          from: process.env.NODEMAILER_EMAIL,
-          to: req.body.teamMate3Email,
-          subject: "Ignitia: Account Creation Required",
-          html:
-            "Greetings!" +
-            "<br>" +
-            "<br>" +
-            "You have been invited to join a team for Ignitia!" +
-            "<br>" +
-            "<br>" +
-            "Unfortunately, it has come to our attention that you have not yet created an account on the Ignitia website. In order to facilitate your participation, we kindly request you to create an account as soon as possible." +
-            "<br>" +
-            "<br>" +
-            "To create an Ignitia account, please follow these steps:" +
-            "<br>" +
-            "     1.Visit the Ignitia website at [insert Ignitia website]." +
-            "<br>" +
-            '     2.Click on the "Sign Up" or "Register" button.' +
-            "<br>" +
-            "     3.Provide the required information, such as your name, email address, and a secure password." +
-            "<br>" +
-            "<br>" +
-            "On successful creation of your account, you will receive an e-mail confirming the same." +
-            "<br>" +
-            "<br>" +
-            "Once your account is created, please reach out to your team leader and ask them to re-register the team to confirm your participation." +
-            "<br>" +
-            "<br>" +
-            "Regards," +
-            "<br>" +
-            "Team Ignitia",
-          auth: {
-            user: process.env.NODEMAILER_EMAIL,
-            refreshToken: process.env.NODEMAILER_REFRESH_TOKEN,
-            accessToken: process.env.NODEMAILER_ACCESS_TOKEN,
-            expires: 3599,
-          },
-        },
-        (err, success) => {
-          if (err) {
-            console.log(err);
-          }
-        }
-      );
-
       return next(
         new AppError(
           `${req.body.teamMate3Email} email is incorrect or the teammate hasn't singed up`,
