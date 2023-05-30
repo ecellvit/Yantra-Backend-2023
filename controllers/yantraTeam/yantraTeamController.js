@@ -307,7 +307,7 @@ exports.createTeam = catchAsync(async (req, res, next) => {
     if (!teamMate1) {
       return next(
         new AppError(
-          `${req.body.teamMate1Email} not registered for yantra`,
+          `${req.body.teamMate1Email} email is incorrect or the teammate hasn't signed up`,
           412,
           errorCodes.ONE_OF_THE_TEAM_MATES_NOT_REGISTERED_FOR_YANTRA
         )
@@ -415,7 +415,7 @@ exports.createTeam = catchAsync(async (req, res, next) => {
     if (!teamMate3) {
       return next(
         new AppError(
-          `${req.body.teamMate3Email} email is incorrect or the teammate hasn't singed up`,
+          `${req.body.teamMate3Email} email is incorrect or the teammate hasn't signed up`,
           412,
           errorCodes.NOT_SIGNED_UP
         )
