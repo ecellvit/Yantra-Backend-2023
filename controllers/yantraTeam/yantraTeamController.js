@@ -187,6 +187,9 @@ exports.createTeam = catchAsync(async (req, res, next) => {
           "Once your account is created, please reach out to your team leader and ask them to re-register the team to confirm your participation." +
           "<br>" +
           "<br>" +
+          "Website Link: https://www.ignitia.tech" +
+          "<br>" +
+          "<br>" +
           "Regards," +
           "<br>" +
           "Team Ignitia",
@@ -236,6 +239,9 @@ exports.createTeam = catchAsync(async (req, res, next) => {
           "Once your account is created, please reach out to your team leader and ask them to re-register the team to confirm your participation." +
           "<br>" +
           "<br>" +
+          "Website Link: https://www.ignitia.tech" +
+          "<br>" +
+          "<br>" +
           "Regards," +
           "<br>" +
           "Team Ignitia",
@@ -283,6 +289,9 @@ exports.createTeam = catchAsync(async (req, res, next) => {
           "<br>" +
           "<br>" +
           "Once your account is created, please reach out to your team leader and ask them to re-register the team to confirm your participation." +
+          "<br>" +
+          "<br>" +
+          "Website Link: https://www.ignitia.tech" +
           "<br>" +
           "<br>" +
           "Regards," +
@@ -1434,6 +1443,9 @@ exports.addMemberRequest = catchAsync(async (req, res, next) => {
         user.lastName +
         "'s Email: " +
         user.email +
+        "<br>" +
+        "<br>" +
+        "Website Link: https://www.ignitia.tech" +
         "<br>" +
         "<br>" +
         "Regards," +
