@@ -277,7 +277,7 @@ exports.yantraSendRequest = catchAsync(async (req, res, next) => {
         yantraTeam.teamName +
         ".<br>" +
         "<br>" +
-        "To Approve or reject the request click on the link https://yantra.ecellvit.com  <br>" +
+        "To Approve or reject the request click on the link https://www.ignitia.tech <br>" +
         user.firstName +
         " " +
         user.lastName +
@@ -917,7 +917,7 @@ exports.yantraUpdateMemberRequest = catchAsync(async (req, res, next) => {
           user.lastName +
           ".<br>" +
           "<br>" +
-          "Click on the link to view the team details https://yantra.ecellvit.com  <br>" +
+          "Click on the link to view the team details https://www.ignitia.tech <br>" +
           "<br>" +
           "<br>" +
           "Regards," +

@@ -1028,7 +1028,7 @@ exports.updateRequest = catchAsync(async (req, res, next) => {
           yantraTeam.teamName +
           ".<br>" +
           "<br>" +
-          "Click on the link to view the team details https://yantra.ecellvit.com <br>" +
+          "Click on the link to view the team details https://www.ignitia.tech <br>" +
           "<br>" +
           "<br>" +
           "Regards," +
@@ -1159,7 +1159,7 @@ exports.removeMember = catchAsync(async (req, res, next) => {
         yantraTeam.teamName +
         ".<br>" +
         "<br>" +
-        "To Join or Create a new Team Click on the link https://yantra.ecellvit.com " +
+        "To Join or Create a new Team Click on the link https://www.ignitia.tech/ " +
         "<br>" +
         "<br>" +
         "Regards," +
