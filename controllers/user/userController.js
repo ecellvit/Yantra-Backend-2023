@@ -60,14 +60,14 @@ exports.registerEvent = catchAsync(async (req, res, next) => {
     }
 
     let eventName;
-    if (req.body.eventCode == eventCodes.YANTRA) {
-      eventName = "IGNITIA";
-    } else if (req.body.eventCode == eventCodes.WORKSHOP_1) {
-      eventName = "WORKSHOP 1";
-    } else if (req.body.eventCode == eventCodes.WORKSHOP_2) {
-      eventName = "WORKSHOP 2";
-    } else if (req.body.eventCode == eventCodes.WORKSHOP_3) {
-      eventName = "WORKSHOP 3";
+    if (req.body.eventCode == eventCodes.IGNITIA) {
+      eventName = "Ignitia Hack";
+    } else if (req.body.eventCode == eventCodes.DEVOPS) {
+      eventName = "DevOps Workshop";
+    } else if (req.body.eventCode == eventCodes.NEXUS) {
+      eventName = "Nexus Workshop";
+    } else if (req.body.eventCode == eventCodes.T_10) {
+      eventName = "T-10 Workshop";
     }
 
     //registering
@@ -130,7 +130,7 @@ exports.registerEvent = catchAsync(async (req, res, next) => {
     }
 
     //part of teams check
-    if (req.body.eventCode === eventCodes.YANTRA) {
+    if (req.body.eventCode === eventCodes.IGNITIA) {
       if (user.yantraTeamId) {
         return next(
           new AppError(

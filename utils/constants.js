@@ -90,10 +90,10 @@ const errorCodes = {
 };
 
 const eventCodes = {
-  YANTRA: 0,
-  WORKSHOP_1: 1,
-  WORKSHOP_2: 2,
-  WORKSHOP_3: 3,
+  IGNITIA: 0,
+  T_10: 1,
+  NEXUS: 2,
+  DEVOPS: 3,
 };
 
 const registerTypes = {
