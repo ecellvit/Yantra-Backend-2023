@@ -78,16 +78,6 @@ exports.createTeam = catchAsync(async (req, res, next) => {
 
   const user = await User.findById({ _id: req.user._id });
 
-  if (user.registeredEvents[eventCodes.YANTRA] === 0) {
-    return next(
-      new AppError(
-        "User not registered for yantra",
-        412,
-        errorCodes.USER_NOT_REGISTERED_FOR_EVENT
-      )
-    );
-  }
-
   //if user is already in a yantraTeam
   if (user.yantraTeamId || user.yantraTeamRole) {
     return next(
@@ -324,16 +314,6 @@ exports.createTeam = catchAsync(async (req, res, next) => {
       );
     }
 
-    if (teamMate1.registeredEvents[eventCodes.YANTRA] === 0) {
-      return next(
-        new AppError(
-          `${req.body.teamMate1Email} not registered for yantra`,
-          412,
-          errorCodes.ONE_OF_THE_TEAM_MATES_NOT_REGISTERED_FOR_YANTRA
-        )
-      );
-    }
-
     if (teamMate1.yantraTeamId || teamMate1.yantraTeamRole) {
       return next(
         new AppError(
@@ -388,16 +368,6 @@ exports.createTeam = catchAsync(async (req, res, next) => {
       );
     }
 
-    if (teamMate2.registeredEvents[eventCodes.YANTRA] === 0) {
-      return next(
-        new AppError(
-          `${req.body.teamMate2Email} not registered for yantra`,
-          412,
-          errorCodes.ONE_OF_THE_TEAM_MATES_NOT_REGISTERED_FOR_YANTRA
-        )
-      );
-    }
-
     if (teamMate2.yantraTeamId || teamMate2.yantraTeamRole) {
       return next(
         new AppError(
@@ -448,16 +418,6 @@ exports.createTeam = catchAsync(async (req, res, next) => {
           `${req.body.teamMate3Email} email is incorrect or the teammate hasn't singed up`,
           412,
           errorCodes.NOT_SIGNED_UP
-        )
-      );
-    }
-
-    if (teamMate3.registeredEvents[eventCodes.YANTRA] === 0) {
-      return next(
-        new AppError(
-          `${req.body.teamMate3Email} not registered for yantra`,
-          412,
-          errorCodes.ONE_OF_THE_TEAM_MATES_NOT_REGISTERED_FOR_YANTRA
         )
       );
     }
