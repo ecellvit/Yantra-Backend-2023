@@ -26,21 +26,13 @@ const teamSchema = mongoose.Schema(
     projectName: {
       type: String,
     },
-    techStack: [
-      {
-        type: Number,
-      },
-    ],
-    youtubeUrl: {
+    videoLink: {
       type: String,
     },
-    desc: {
+    githubLink: {
       type: String,
     },
-    fileUrl: {
-      type: String,
-    },
-    fileId: {
+    fileLink: {
       type: String,
     },
   },

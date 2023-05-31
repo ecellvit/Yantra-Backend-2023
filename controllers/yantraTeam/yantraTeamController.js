@@ -1557,20 +1557,6 @@ exports.yantraUploadFile = catchAsync(async (req, res, next) => {
     );
   }
 
-  // const teamsSubmitted = await yantraTeams.find({
-  //   projectName: { $ne: null },
-  // });
-
-  // if (teamsSubmitted.length >= 50) {
-  //   return next(
-  //     new AppError(
-  //       "Submissions have been closed Temporarily",
-  //       412,
-  //       errorCodes.MAXIMUM_NUMBER_OF_TEAMS_REACHED
-  //     )
-  //   );
-  // }
-
   const user = await User.findById({ _id: req.user._id });
 
   if (user.yantraTeamId === null) {
@@ -1590,11 +1576,9 @@ exports.yantraUploadFile = catchAsync(async (req, res, next) => {
     {
       $set: {
         projectName: req.body.projectName,
-        techStack: req.body.techStack,
-        youtubeUrl: req.body.youtubeUrl,
-        desc: req.body.desc,
-        fileUrl: req.body.fileUrl,
-        fileId: req.body.fileId,
+        videoLink: req.body.videoLink,
+        githubLink: req.body.githubLink,
+        fileLink: req.body.fileLink,
       },
     }
   );
@@ -1625,10 +1609,8 @@ exports.yantraGetFile = catchAsync(async (req, res, next) => {
     message: "File fetched successfully",
     teamName: team.teamName,
     projectName: team.projectName,
-    techStack: team.techStack,
-    youtubeUrl: team.youtubeUrl,
-    desc: team.desc,
-    fileUrl: team.fileUrl,
-    fileId: team.fileId,
+    videoLink: team.videoLink,
+    githubLink: team.githubLink,
+    fileLink: team.fileLink,
   });
 });
