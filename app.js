@@ -43,10 +43,12 @@ app.get("/heartbeat", function (req, res) {
   });
 });
 
+const adminRoute = "/api/admin/" + process.env.ADMIN_SECRET;
 app.use("/api/auth", require("./routes/authRoutes"));
 app.use("/api/yantra", require("./routes/yantraTeamRoutes"));
 app.use("/api/events", require("./routes/eventRoutes"));
 app.use("/api/user", require("./routes/userRoutes"));
+app.use(adminRoute, require("./routes/adminRoutes"));
 
 //all invalid urls handled here
 app.all("*", (req, res, next) => {
