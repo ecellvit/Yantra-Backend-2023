@@ -79,18 +79,20 @@ exports.registerEvent = catchAsync(async (req, res, next) => {
       );
     }
 
-    const usersRegisteredForT10 = await User.find({
-      "registeredEvents.1": registerTypes.REGISTERED,
-    });
+    if (req.body.eventCode == eventCodes.T_10) {
+      const usersRegisteredForT10 = await User.find({
+        "registeredEvents.1": registerTypes.REGISTERED,
+      });
 
-    if (usersRegisteredForT10.length >= 500) {
-      return next(
-        new AppError(
-          "Registration for T-10 Workshop is closed",
-          412,
-          errorCodes.REGISTRATIONS_CLOSED
-        )
-      );
+      if (usersRegisteredForT10.length >= 500) {
+        return next(
+          new AppError(
+            "Registration for T-10 Workshop is closed",
+            412,
+            errorCodes.REGISTRATIONS_CLOSED
+          )
+        );
+      }
     }
 
     let eventName;
@@ -196,18 +198,20 @@ exports.registerEvent = catchAsync(async (req, res, next) => {
       );
     }
 
-    const usersRegisteredForT10 = await User.find({
-      "registeredEvents.1": registerTypes.REGISTERED,
-    });
+    if (req.body.eventCode == eventCodes.T_10) {
+      const usersRegisteredForT10 = await User.find({
+        "registeredEvents.1": registerTypes.REGISTERED,
+      });
 
-    if (usersRegisteredForT10.length >= 500) {
-      return next(
-        new AppError(
-          "Registration for T-10 Workshop is closed",
-          412,
-          errorCodes.REGISTRATIONS_CLOSED
-        )
-      );
+      if (usersRegisteredForT10.length >= 500) {
+        return next(
+          new AppError(
+            "Registration for T-10 Workshop is closed",
+            412,
+            errorCodes.REGISTRATIONS_CLOSED
+          )
+        );
+      }
     }
 
     await User.findOneAndUpdate(
