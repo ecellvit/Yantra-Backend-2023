@@ -79,29 +79,27 @@ exports.getAllCounts = catchAsync(async (req, res, next) => {
 });
 
 exports.getDevopsRegisteredUsers = catchAsync(async (req, res, next) => {
-  exports.getTradingWorkshopUsers = catchAsync(async (req, res, next) => {
-    const devopsRegistersUsers = await User.find(
-      {
-        "registeredEvents.3": registerTypes.REGISTERED,
-      },
-      {
-        _id: 0,
-        loginType: 0,
-        hasFilledDetails: 0,
-        yantraPendingRequests: 0,
-        yantraTeamId: 0,
-        yantraTeamRole: 0,
-        registeredEvents: 0,
-        date: 0,
-        __v: 0,
-      }
-    );
+  const devopsRegisteredUsers = await User.find(
+    {
+      "registeredEvents.3": registerTypes.REGISTERED,
+    },
+    {
+      _id: 0,
+      loginType: 0,
+      hasFilledDetails: 0,
+      yantraPendingRequests: 0,
+      yantraTeamId: 0,
+      yantraTeamRole: 0,
+      registeredEvents: 0,
+      date: 0,
+      __v: 0,
+    }
+  );
 
-    res.status(200).json({
-      message: "Data Fetched Successfully",
-      No_Of_Users_Registered_For_Tading_Workshop: devopsRegistersUsers.length,
-      devopsRegistersUsers,
-    });
+  res.status(200).json({
+    message: "Data Fetched Successfully",
+    No_Of_Users_Registered_For_Devops_Workshop: devopsRegisteredUsers.length,
+    devopsRegisteredUsers,
   });
 });
 
