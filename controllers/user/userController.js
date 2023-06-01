@@ -59,7 +59,7 @@ exports.registerEvent = catchAsync(async (req, res, next) => {
       );
     }
 
-    if (req.body.eventName == eventCodes.DEVOPS) {
+    if (req.body.eventCode == eventCodes.DEVOPS) {
       return next(
         new AppError(
           "Registration for DevOps Workshop is closed",
@@ -166,7 +166,7 @@ exports.registerEvent = catchAsync(async (req, res, next) => {
       }
     }
 
-    if (req.body.eventName == eventCodes.DEVOPS) {
+    if (req.body.eventCode == eventCodes.DEVOPS) {
       return next(
         new AppError(
           "Registration for DevOps is closed",
