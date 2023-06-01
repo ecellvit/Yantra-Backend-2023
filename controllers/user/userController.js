@@ -79,10 +79,13 @@ exports.registerEvent = catchAsync(async (req, res, next) => {
       );
     }
 
+    console.log("here",req.body.eventCode);
+    console.log(eventCodes.T_10,req.body.eventCode == eventCodes.T_10);
     if (req.body.eventCode == eventCodes.T_10) {
       const usersRegisteredForT10 = await User.find({
         "registeredEvents.1": registerTypes.REGISTERED,
       });
+      console.log(usersRegisteredForT10.length);
 
       if (usersRegisteredForT10.length >= 500) {
         return next(
@@ -197,12 +200,11 @@ exports.registerEvent = catchAsync(async (req, res, next) => {
         )
       );
     }
-
     if (req.body.eventCode == eventCodes.T_10) {
       const usersRegisteredForT10 = await User.find({
         "registeredEvents.1": registerTypes.REGISTERED,
       });
-
+      console.log(usersRegisteredForT10.length);
       if (usersRegisteredForT10.length >= 500) {
         return next(
           new AppError(

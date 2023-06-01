@@ -11,7 +11,7 @@ exports.getAllCounts = catchAsync(async (req, res, next) => {
 
   const t10RegisteredUsers = [];
   for (let i = 0; i < users.length; i++) {
-    if (users[i].registeredEvents && users[i].registeredEvents[0] === 1) {
+    if (users[i].registeredEvents && users[i].registeredEvents[1] === 1) {
       t10RegisteredUsers.push(users[i]);
     }
   }
