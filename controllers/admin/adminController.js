@@ -77,3 +77,108 @@ exports.getAllCounts = catchAsync(async (req, res, next) => {
     No_of_Ignitia_Hack_Teams_With_4_Members: yantraTeamsWithFourMembers.length,
   });
 });
+
+exports.getDevopsRegisteredUsers = catchAsync(async (req, res, next) => {
+  exports.getTradingWorkshopUsers = catchAsync(async (req, res, next) => {
+    const devopsRegistersUsers = await User.find(
+      {
+        "registeredEvents.3": registerTypes.REGISTERED,
+      },
+      {
+        _id: 0,
+        loginType: 0,
+        hasFilledDetails: 0,
+        yantraPendingRequests: 0,
+        yantraTeamId: 0,
+        yantraTeamRole: 0,
+        registeredEvents: 0,
+        date: 0,
+        __v: 0,
+      }
+    );
+
+    res.status(200).json({
+      message: "Data Fetched Successfully",
+      No_Of_Users_Registered_For_Tading_Workshop: devopsRegistersUsers.length,
+      devopsRegistersUsers,
+    });
+  });
+});
+
+exports.getT10RegisteredUsers = catchAsync(async (req, res, next) => {
+  const t10RegisteredUsers = await User.find(
+    {
+      "registeredEvents.1": registerTypes.REGISTERED,
+    },
+    {
+      _id: 0,
+      loginType: 0,
+      hasFilledDetails: 0,
+      yantraPendingRequests: 0,
+      yantraTeamId: 0,
+      yantraTeamRole: 0,
+      registeredEvents: 0,
+      date: 0,
+      __v: 0,
+    }
+  );
+
+  res.status(200).json({
+    message: "Data Fetched Successfully",
+    No_Of_Users_Registered_For_T10_Workshop: t10RegisteredUsers.length,
+    t10RegisteredUsers,
+  });
+});
+
+exports.getNexusRegisteredUsers = catchAsync(async (req, res, next) => {
+  const nexusRegisteredUsers = await User.find(
+    {
+      "registeredEvents.2": registerTypes.REGISTERED,
+    },
+    {
+      _id: 0,
+      loginType: 0,
+      hasFilledDetails: 0,
+      yantraPendingRequests: 0,
+      yantraTeamId: 0,
+      yantraTeamRole: 0,
+      registeredEvents: 0,
+      date: 0,
+      __v: 0,
+    }
+  );
+
+  res.status(200).json({
+    message: "Data Fetched Successfully",
+    No_Of_Users_Registered_For_Nexus_Workshop: nexusRegisteredUsers.length,
+    nexusRegisteredUsers,
+  });
+});
+
+exports.getIgnitiaTeams = catchAsync(async (req, res, next) => {
+  const yantraTeams = await yantraTeamModel
+    .find(
+      {},
+      {
+        _id: 0,
+        noOfTimesTeamNameChanged: 0,
+        noOfPendingRequests: 0,
+        __v: 0,
+        teamLeaderId: 0,
+      }
+    )
+    .populate("members", {
+      email: 1,
+      firstName: 1,
+      lastName: 1,
+      mobileNumber: 1,
+      regNo: 1,
+      _id: 0,
+    });
+
+  res.status(200).json({
+    message: "Data Fetched Successfully",
+    No_Of_Ignitia_Hack_Teams: yantraTeams.length,
+    yantraTeams,
+  });
+});
