@@ -69,6 +69,16 @@ exports.registerEvent = catchAsync(async (req, res, next) => {
       );
     }
 
+    if (req.body.eventCode == eventCodes.NEXUS) {
+      return next(
+        new AppError(
+          "Registration for Nexus Workshop is closed",
+          412,
+          errorCodes.REGISTRATIONS_CLOSED
+        )
+      );
+    }
+
     const usersRegisteredForT10 = await User.find({
       "registeredEvents.1": registerTypes.REGISTERED,
     });
@@ -170,6 +180,16 @@ exports.registerEvent = catchAsync(async (req, res, next) => {
       return next(
         new AppError(
           "Registration for DevOps is closed",
+          412,
+          errorCodes.REGISTRATIONS_CLOSED
+        )
+      );
+    }
+
+    if (req.body.eventCode == eventCodes.NEXUS) {
+      return next(
+        new AppError(
+          "Registration for Nexus Workshop is closed",
           412,
           errorCodes.REGISTRATIONS_CLOSED
         )
