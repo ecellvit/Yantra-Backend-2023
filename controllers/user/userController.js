@@ -59,6 +59,30 @@ exports.registerEvent = catchAsync(async (req, res, next) => {
       );
     }
 
+    if (req.body.eventName == eventCodes.DEVOPS) {
+      return next(
+        new AppError(
+          "Registration for DevOps Workshop is closed",
+          412,
+          errorCodes.REGISTRATIONS_CLOSED
+        )
+      );
+    }
+
+    const usersRegisteredForT10 = await User.find({
+      "registeredEvents.1": registerTypes.REGISTERED,
+    });
+
+    if (usersRegisteredForT10.length >= 500) {
+      return next(
+        new AppError(
+          "Registration for T-10 Workshop is closed",
+          412,
+          errorCodes.REGISTRATIONS_CLOSED
+        )
+      );
+    }
+
     let eventName;
     if (req.body.eventCode == eventCodes.IGNITIA) {
       eventName = "Ignitia Hack";
@@ -140,6 +164,30 @@ exports.registerEvent = catchAsync(async (req, res, next) => {
           )
         );
       }
+    }
+
+    if (req.body.eventName == eventCodes.DEVOPS) {
+      return next(
+        new AppError(
+          "Registration for DevOps is closed",
+          412,
+          errorCodes.REGISTRATIONS_CLOSED
+        )
+      );
+    }
+
+    const usersRegisteredForT10 = await User.find({
+      "registeredEvents.1": registerTypes.REGISTERED,
+    });
+
+    if (usersRegisteredForT10.length >= 500) {
+      return next(
+        new AppError(
+          "Registration for T-10 Workshop is closed",
+          412,
+          errorCodes.REGISTRATIONS_CLOSED
+        )
+      );
     }
 
     await User.findOneAndUpdate(
