@@ -163,6 +163,7 @@ exports.getIgnitiaTeams = catchAsync(async (req, res, next) => {
         noOfPendingRequests: 0,
         __v: 0,
         teamLeaderId: 0,
+        videoLink: 0,
       }
     )
     .populate("members", {
