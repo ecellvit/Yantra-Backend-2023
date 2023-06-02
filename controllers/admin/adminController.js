@@ -53,8 +53,13 @@ exports.getAllCounts = catchAsync(async (req, res, next) => {
   const yantraTeamsWithTwoMembers = [];
   const yantraTeamsWithThreeMembers = [];
   const yantraTeamsWithFourMembers = [];
+  let submissionCount = 0;
 
   for (let i = 0; i < yantraTeams.length; i++) {
+    if (yantraTeams[i].projectName) {
+      submissionCount++;
+    }
+
     if (yantraTeams[i].members.length === 2) {
       yantraTeamsWithTwoMembers.push(yantraTeams[i]);
     } else if (yantraTeams[i].members.length === 3) {
@@ -72,6 +77,7 @@ exports.getAllCounts = catchAsync(async (req, res, next) => {
     Number_of_Users_Registered_for_T10_Workshop: t10RegisteredUsers.length,
     Number_of_Users_Registered_for_Nexus_Workshop: nexusRegisteredUsers.length,
     No_of_Ignitia_Hack_Teams: yantraTeams.length,
+    No_of_Ignitia_Hack_Teams_Submitted: submissionCount,
     No_of_Ignitia_Hack_Teams_With_2_Members: yantraTeamsWithTwoMembers.length,
     No_of_Ignitia_Hack_Teams_With_3_Members: yantraTeamsWithThreeMembers.length,
     No_of_Ignitia_Hack_Teams_With_4_Members: yantraTeamsWithFourMembers.length,
